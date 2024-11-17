@@ -13,6 +13,8 @@ inline void add(const int& x, const int& y, std::unordered_set<std::string>& _se
 }
 
 int main() {
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
     std::unordered_set<std::string> _set;
     int x = 0, y = 0;
     int xr = 0, yr = 0;
@@ -67,7 +69,7 @@ int main() {
         }
         flip *= -1;
     }
-    std::cout << _set.size() << std::endl;
+    std::cout << _set.size() << '\n';
     return 0;
 }
 
