@@ -3,7 +3,39 @@
 #define SLASH 92
 #define DOUBLEQ 34
 
+// p2
 int main(void)
+{
+    char c;
+    size_t original = 0;
+    size_t after = 0; 
+    size_t lines = 0;
+    while((c = getc(stdin)) != EOF)
+    {
+        if (c == '\n')
+        {
+            lines++;
+            continue;
+        }
+        original++;
+        if (c + 0 == DOUBLEQ)
+        {
+            after += 1;
+        }
+        if (c + 0 == SLASH)
+        {
+            after += 1;
+        }
+    }
+    after = after + original + (2 * lines);
+    printf("Original, %lu\n", original);
+    printf("After, %lu\n", after);
+    printf("Dif, %lu\n", after - original);
+    return 0;
+}
+
+// p1
+int main1(void)
 {
     char c, next;
     size_t total_c = 0;
