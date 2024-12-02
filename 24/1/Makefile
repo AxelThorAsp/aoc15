@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -Wall -Wextra -Werror -O2
+CFLAGS = -Wall -Wextra -Werror -O3
 SOURCE = 1.cpp
 OUT = 1.o
 
