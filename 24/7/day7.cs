@@ -18,7 +18,7 @@ namespace Aoc
         private static long _sum;
         private static void Main(string[] args)
         {
-            string? line;
+            string line;
             while((line = Console.ReadLine()) != null)
             {
                 var split = line.Split(':');
