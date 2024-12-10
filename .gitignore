@@ -1,0 +1,7 @@
+*.out
+*.o
+in
+sample
+*.txt
+*.exe
+*.class
