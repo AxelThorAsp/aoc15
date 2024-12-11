@@ -16,7 +16,10 @@ def transform(stone, depth):
         return 1 + transform(int(s[:len(s)//2]),depth-1) + transform(int(s[len(s)//2:]), depth-1)
     return transform(2024 * stone, depth-1)
 
-t = 0
+p2 = 0
+p1 = 0
 for s in stones:
-    t+=transform(s,75)
-print(t+len(stones))
+    p2+=transform(s,75)
+    p1+=transform(s,25)
+print(p1+len(stones))
+print(p2+len(stones))
