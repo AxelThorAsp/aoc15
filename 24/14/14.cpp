@@ -19,8 +19,8 @@ void step(int i)
 {
     auto& p = pos[i];
     auto& v = vel[i];
-    int nx = p.first + v.first;
-    int ny = p.second + v.second;
+    int nx = p.first + v.first * 100;
+    int ny = p.second + v.second * 100;
     nx = (nx % W + W) % W;
     ny = (ny % H + H) % H;
     p.first = nx;
@@ -36,12 +36,10 @@ int main()
         pos.push_back(make_pair(a, b));
         vel.push_back(make_pair(c, d));
     }
-    for (int t = 0; t < STEPS; t++)
+
+    for (int i = 0; i < (int)pos.size(); i++)
     {
-        for (int i = 0; i < (int)pos.size(); i++)
-        {
-            step(i);
-        }
+        step(i);
     }
 
     for (int i = 0; i < (int)pos.size(); i++)
