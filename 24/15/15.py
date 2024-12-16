@@ -19,12 +19,6 @@ BOX = "O"
 START = (-999, -999)
 BOXES = []
 
-class Box:
-    def __init__(self, x, y):
-        self.x = x,
-        self.y = y
-
-
 DMAP = {
     '^' : (0, -1),
     'v' : (0, 1),
@@ -39,8 +33,6 @@ def get_start():
             if c == '@':
                 START = (x, y)
                 M[y][x] = '.'
-            if c == BOX:
-                BOXES.append(Box(x,y))
 get_start()
 
 def step(pos, d):
