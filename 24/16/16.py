@@ -10,28 +10,44 @@ for y, l in enumerate(M):
             START = (x,y)
         if c == 'E':
             END = (x,y)
-
-def nbors(pos):
+# left down right up
+DIRS = [(-1,0),(0,1),(1,0),(0,-1)]
+def nbors(pos, d):
     x,y = pos
-    for dx,dy in [(-1,0),(1,0),(0,-1),(0,1)]:
-        if M[y+dy][x+dx] != "#":
-            yield ((x+dx, y+dy),(dx,dy))
+    dx,dy = DIRS[(d)]
+    if M[y+dy][x+dx] != "#":
+        yield (1,(x+dx,y+dy),d)
+    yield (1000,(x, y),(d+1)%4)
+    yield (1000,(x, y),(d+3)%4)
 
 def dijkstra(start, end):
-    heap = [(0, start)]
-    dist = {start: 0}  
-    dirr = {start: (1,0)}
+    heap = [(0, (start, 2))]
+    dist = {(start, 2): 0}  
+    pred = {(start, 2): []}
     while heap:
-        curr_dist, node = heapq.heappop(heap)
-        if node == end:
-            return curr_dist
-        for nbor, d in nbors(node):
-            delta = 1001 if dirr[node] != d else 1
-            new_dist = curr_dist + delta
-            if nbor not in dist or new_dist < dist[nbor]:
-                dist[nbor] = new_dist
-                dirr[nbor] = d
-                heapq.heappush(heap, (new_dist, nbor))
-    return -1
+        curr_dist, _node = heapq.heappop(heap)
+        node, dn = _node
+        for w, nbor, dd in nbors(node, dn):
+            new_dist = w + curr_dist
+            if (nbor,dd) not in dist:
+                dist[(nbor,dd)] = 9999999999999999999
+                pred[(nbor,dd)] = []
+            if new_dist < dist[(nbor,dd)]:
+                dist[(nbor,dd)] = new_dist
+                pred[(nbor,dd)] = [(node, dn)]
+                heapq.heappush(heap, (new_dist, (nbor, dd)))
+            elif new_dist == dist[(nbor,dd)]:
+                pred[(nbor,dd)].append((node,dn))
 
-print(dijkstra(START, END))
+    return dist, pred
+p1, pred = dijkstra(START, END)
+
+seen = set()
+def do(pair):
+    p,d = pair
+    seen.add(p)
+    for k in pred[pair]:
+        do(k)
+
+do((END,3))
+print(len(seen))
