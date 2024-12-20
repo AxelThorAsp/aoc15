@@ -93,7 +93,8 @@ int main(void)
     size_t ip = 0;
     while (ip < prog_size)
     {
-        assert(ip + 1 < prog_size); uc opcode = program[ip];
+        assert(ip + 1 < prog_size);
+        uc opcode = program[ip];
         uc operand = program[ip + 1];
         resolve(opcode, operand, &a, &b, &c, &ip);
     }
